@@ -353,9 +353,6 @@ void WindowSDL::WaitEvent() {
     case SDL_EVENT_KEY_UP:
         OnKeyPress(&event);
         break;
-    case SDL_EVENT_GAMEPAD_BUTTON_DOWN:
-    case SDL_EVENT_GAMEPAD_BUTTON_UP:
-    case SDL_EVENT_GAMEPAD_AXIS_MOTION:
     case SDL_EVENT_GAMEPAD_ADDED:
     case SDL_EVENT_GAMEPAD_REMOVED:
     case SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN:
@@ -598,6 +595,8 @@ void WindowSDL::OnGamepadEvent(const SDL_Event* event) {
      switch (event->type) {
      case SDL_EVENT_GAMEPAD_ADDED:
      case SDL_EVENT_GAMEPAD_REMOVED:
+         controller->SetEngine(std::make_unique<Input::SDLInputEngine>());
+         break;
      case SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN:
      case SDL_EVENT_GAMEPAD_TOUCHPAD_UP:
      case SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION:
@@ -624,7 +623,7 @@ void WindowSDL::OnGamepadEvent(const SDL_Event* event) {
              controller->CheckButton(0, button, event->type == SDL_EVENT_GAMEPAD_BUTTON_DOWN);
          }
          break;
- 
+     }
      case SDL_EVENT_GAMEPAD_AXIS_MOTION:
          axis = event->gaxis.axis == SDL_GAMEPAD_AXIS_LEFTX           ? Input::Axis::LeftX
                 : event->gaxis.axis == SDL_GAMEPAD_AXIS_LEFTY         ? Input::Axis::LeftY
@@ -643,6 +642,7 @@ void WindowSDL::OnGamepadEvent(const SDL_Event* event) {
              }
          }
          break;
-}
+     }
+ }
 
 } // namespace Frontend
