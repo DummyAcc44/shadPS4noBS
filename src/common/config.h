@@ -39,6 +39,8 @@ std::string getUserName();
 std::string getUpdateChannel();
 std::string getChooseHomeTab();
 
+u16 leftDeadZone();
+u16 rightDeadZone();
 s16 getCursorState();
 int getCursorHideTimeout();
 double getTrophyNotificationDuration();
@@ -169,9 +171,6 @@ std::vector<std::string> getRecentFiles();
 std::string getEmulatorLanguage();
 
 void setDefaultValues();
-
-// todo: name and function location pending
-std::filesystem::path GetFoolproofKbmConfigFile(const std::string& game_id = "");
 
 // settings
 u32 GetLanguage();
