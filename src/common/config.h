@@ -9,6 +9,9 @@
 
 namespace Config {
 
+std::filesystem::path GetFoolproofKbmConfigFile(const std::string& game_id = "");
+ 
+
 enum HideCursorState : s16 { Never, Idle, Always };
 
 void load(const std::filesystem::path& path);
